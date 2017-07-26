@@ -455,32 +455,32 @@
 </template>
 
 <script>
-    import Auth from '../../mixin/Auth.js';
-    export default {
-        mixins: [Auth],
-    }
+import Auth from '../../mixin/Auth.js'
+export default {
+  mixins: [Auth]
+}
 </script>
 
 <style scope lang="scss">
-	.mainbody {
-	  background: #f0f0f0;
-		}
-	.dropdown-menu {
-	  padding: 0px;
-	  overflow: hidden;
-	}
+.mainbody {
+  background: #f0f0f0;
+}
+.dropdown-menu {
+  padding: 0px;
+  overflow: hidden;
+}
 
-	.post-content {
-	  margin-left: 58px;
-	}
+.post-content {
+  margin-left: 58px;
+}
 
-	.badge-important {
-	  margin-top: 3px;
-	  margin-left: 25px;
-	  position: absolute;
-	}
+.badge-important {
+  margin-top: 3px;
+  margin-left: 25px;
+  position: absolute;
+}
 
-	body {
-	  background-color: #e8e8e8;
-	}
+body {
+  background-color: #e8e8e8;
+}
 </style>
