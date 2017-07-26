@@ -163,7 +163,6 @@
 </template>
 
 <script>
-import Push from 'push.js'
 import InfiniteLoading from 'vue-infinite-loading'
 import NewMessage from './NewMessage.vue'
 import Auth from '../../mixin/Auth.js'
@@ -205,14 +204,14 @@ export default {
     updateConversation () {
       var self = this
       // if new message is belong to current conservation => push it
-      socket.on('refresh message', function (message) {
+      window.socket.on('refresh message', function (message) {
         if (message.conversationId === self.currentConversationId) {
           self.currentConversation.push(message)
         }
         self.$store.dispatch('conversations/fetchConversations')
       })
       // else updated snippet whenver new message
-      socket.on('new message', function (data) {
+      window.socket.on('new message', function (data) {
         self.$store.dispatch('conversations/fetchConversations')
       })
     },
@@ -229,7 +228,7 @@ export default {
     },
     deleteConversation () {
       var self = this
-      swal({
+      window.swal({
         title: 'Are you sure to delete this conversation',
         text: "You won't be able to revert this!",
         type: 'warning',
@@ -255,7 +254,7 @@ export default {
     },
     getOnlineUser () {
       var self = this
-      socket.on('user online list', function (data) {
+      window.socket.on('user online list', function (data) {
         console.log(data)
         self.onlineUsers = data
       })

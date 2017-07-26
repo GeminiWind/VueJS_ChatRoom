@@ -55,12 +55,12 @@ export default {
     login () {
       this.$validator.validateAll()
       if (!this.errors.any()) {
-        axios.post('/login', {email: this.user.email, password: this.user.password}).then(response => {
+        window.axios.post('/login', {email: this.user.email, password: this.user.password}).then(response => {
           if (response.data.error == null) {
             this.$auth.setToken(response.data.data.token, response.data.data.expiration * 1000 + Date.now())
-            this.$router.push({ path: '/feed'})
+            this.$router.push({ path: '/feed' })
           } else {
-            swal({
+            window.swal({
               title: 'Whoops!',
               text: response.data.error,
               type: 'error',
@@ -68,7 +68,8 @@ export default {
             })
           }
         }).catch(function (error) {
-          swal({
+          console.log(error)
+          window.swal({
             title: 'Whoops!',
             text: 'Look like something went wrongs!! Try again',
             type: 'error',
