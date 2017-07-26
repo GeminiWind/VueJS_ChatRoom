@@ -137,69 +137,69 @@
 </template>
 
 <script>
-	export default {
-        computed: {
-            isAuth(){
-                return this.$auth.isAuthenticated();
-            }
-        }
-	}
+export default {
+  computed: {
+    isAuth () {
+      return this.$auth.isAuthenticated()
+    }
+  }
+}
 </script>
 
 <style scope lang="scss">
-	.mainbody {
+.mainbody {
   background: #f0f0f0;
-	}
+}
 
-	/* Special class on .container surrounding .navbar, used for positioning it into place. */
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
 
-	.navbar-wrapper {
-	  position: fixed;
-	  top: 0;
-	  left: 0;
-	  right: 0;
-	  z-index: 20;
-	  margin-left: -15px;
-	  margin-right: -15px;
-	  .container {
-	    padding-left: 0;
-	    padding-right: 0;
-	  }
-	  .navbar {
-	    padding-left: 15px;
-	    padding-right: 15px;
-	  }
-	}
+.navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-left: -15px;
+  margin-right: -15px;
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .navbar {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
 
-	/* Flip around the padding for proper display in narrow viewports */
+/* Flip around the padding for proper display in narrow viewports */
 
-	.navbar-content {
-	  width: 320px;
-	  padding: 15px;
-	  padding-bottom: 0px;
-	  &:before, &:after {
-	    display: table;
-	    content: "";
-	    line-height: 0;
-	  }
-	}
+.navbar-content {
+  width: 320px;
+  padding: 15px;
+  padding-bottom: 0px;
+  &:before, &:after {
+    display: table;
+    content: "";
+    line-height: 0;
+  }
+}
 
-	.navbar-nav.navbar-right:last-child {
-	  margin-right: 15px !important;
-	}
+.navbar-nav.navbar-right:last-child {
+  margin-right: 15px !important;
+}
 
-	.navbar-footer {
-	  background-color: #DDD;
-	}
+.navbar-footer {
+  background-color: #DDD;
+}
 
-	.navbar-footer-content {
-	  padding: 15px 15px 15px 15px;
-	}
+.navbar-footer-content {
+  padding: 15px 15px 15px 15px;
+}
 
-	.dropdown-menu {
-	  padding: 0px;
-	  overflow: hidden;
-	}
+.dropdown-menu {
+  padding: 0px;
+  overflow: hidden;
+}
 
 	.brand_network {
 	  color: #9D9D9D;

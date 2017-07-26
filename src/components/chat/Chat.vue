@@ -163,96 +163,105 @@
 </template>
 
 <script>
-  import Push from 'push.js';
-  import InfiniteLoading from 'vue-infinite-loading';
-  import NewMessage from './NewMessage.vue';
-  import Auth from '../../mixin/Auth.js';
-  export default {
-    name: 'chat',
-    data(){
-      return {
-        message: '',
-        keyword: '',
-        file: null
-      }
+import Push from 'push.js'
+import InfiniteLoading from 'vue-infinite-loading'
+import NewMessage from './NewMessage.vue'
+import Auth from '../../mixin/Auth.js'
+export default {
+  name: 'chat',
+  data () {
+    return {
+      message: '',
+      keyword: '',
+      file: null,
+      onlineUsers: {}
+    }
+  },
+  components: {
+    InfiniteLoading,
+    NewMessage
+  },
+  mixins: [Auth],
+  computed: {
+    conversations () {
+      return this.$store.getters['conversations/allConversation']
     },
-    components: {
-      InfiniteLoading,
-      NewMessage
+    currentConversation () {
+      return this.$store.getters['conversations/currentConversation']
     },
-    mixins: [Auth],
-    computed :{
-        conversations(){
-          return this.$store.getters['conversations/allConversation'];
-        },
-        currentConversation() {
-          return this.$store.getters['conversations/currentConversation'];
-        },
-        currentConversationId() {
-          return this.$store.getters['conversations/currentConversationId'];
+    currentConversationId () {
+      return this.$store.getters['conversations/currentConversationId']
+    }
+  },
+  created () {
+    this.fetchConversations()
+    this.updateConversation()
+    this.getOnlineUser()
+  },
+  methods: {
+    fetchConversations () {
+      this.$store.dispatch('conversations/fetchConversations')
+    },
+    updateConversation () {
+      var self = this
+      // if new message is belong to current conservation => push it
+      socket.on('refresh message', function (message) {
+        if (message.conversationId === self.currentConversationId) {
+          self.currentConversation.push(message)
         }
-      },
-      created(){
-        this.fetchConversations();
-        this.updateConversation();
-      },
-      methods: {
-        fetchConversations() {
-          this.$store.dispatch('conversations/fetchConversations');
-        },
-        updateConversation() {
-          var self = this;
-          //if new message is belong to current conservation => push it
-          socket.on('refresh message', function(message){
-            if (message.conversationId === self.currentConversationId) {
-              self.currentConversation.push(message);
-            }
-              self.$store.dispatch('conversations/fetchConversations');
-          });
-          // else updated snippet whenver new message
-          socket.on('new message', function(data){
-              self.$store.dispatch('conversations/fetchConversations');
-          });
-        },
-        fetchConversationContent(conversationId){
-          this.$store.dispatch('conversations/fetchConversationContent',{conversationId: conversationId});
-        },
-        replyConversation() {
-          this.$store.dispatch('conversations/replyConversation',{conversationId: this.currentConversationId,message: this.message});
-          this.fetchConversations();
-          this.message = '';
-        },
-        searchConversation(){
-          console.log(this.keyword);
-        },
-        deleteConversation(){
-          var self = this;
-          swal({
-            title: 'Are you sure to delete this conversation',
-            text: "You won't be able to revert this!",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then(function () {
-            self.$store.dispatch('conversations/deleteConversation',{conversationId: self.currentConversationId});
-            self.$store.dispatch('conversations/fetchConversations');
-          })
-        },
-        createdNewConversation(payload){
-          this.$store.dispatch('conversations/createConversation', payload);
-          this.fetchConversations();
-        },
-         fileChange(file, name) {
-            var data = new FormData();
-            data.append('picture', file);
-            this.$store.dispatch('conversations/replyConversationImage',{conversationId: this.currentConversationId,data: data});
-            this.fetchConversations();
-            this.file = null;
-        }
-      },
+        self.$store.dispatch('conversations/fetchConversations')
+      })
+      // else updated snippet whenver new message
+      socket.on('new message', function (data) {
+        self.$store.dispatch('conversations/fetchConversations')
+      })
+    },
+    fetchConversationContent (conversationId) {
+      this.$store.dispatch('conversations/fetchConversationContent', {conversationId: conversationId})
+    },
+    replyConversation () {
+      this.$store.dispatch('conversations/replyConversation', {conversationId: this.currentConversationId, message: this.message})
+      this.fetchConversations()
+      this.message = ''
+    },
+    searchConversation () {
+      console.log(this.keyword)
+    },
+    deleteConversation () {
+      var self = this
+      swal({
+        title: 'Are you sure to delete this conversation',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function () {
+        self.$store.dispatch('conversations/deleteConversation', {conversationId: self.currentConversationId})
+        self.$store.dispatch('conversations/fetchConversations')
+      })
+    },
+    createdNewConversation (payload) {
+      this.$store.dispatch('conversations/createConversation', payload)
+      this.fetchConversations()
+    },
+    fileChange (file, name) {
+      var data = new FormData()
+      data.append('picture', file)
+      this.$store.dispatch('conversations/replyConversationImage', {conversationId: this.currentConversationId, data: data})
+      this.fetchConversations()
+      this.file = null
+    },
+    getOnlineUser () {
+      var self = this
+      socket.on('user online list', function (data) {
+        console.log(data)
+        self.onlineUsers = data
+      })
+    }
   }
+}
 </script>
 
 <style lang="scss" scoped>

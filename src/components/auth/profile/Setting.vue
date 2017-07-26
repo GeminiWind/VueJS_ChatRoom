@@ -267,18 +267,18 @@
 </template>
 
 <script>
-    import Auth from '../../../mixin/Auth.js'; 
-    export default{
-        mixins: [Auth],
-        data() {
-            return {
-                firstName: '',
-                lastName: '',
-                bio: '',
-                location: ''
-            }
-        }
+import Auth from '../../../mixin/Auth.js'
+export default{
+  mixins: [Auth],
+  data () {
+    return {
+      firstName: '',
+      lastName: '',
+      bio: '',
+      location: ''
     }
+  }
+}
 </script>
 
 <style scope lang="scss">

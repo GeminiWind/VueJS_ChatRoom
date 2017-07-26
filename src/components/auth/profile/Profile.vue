@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
    <div class="panel panel-default">
       <div class="panel-body">
          <div class="media">
@@ -371,31 +371,28 @@
 </template>
 
 <script>
-	export default {
+export default {
 
-	}
+}
 </script>
 
 <style scope lang="scss">
-	.mainbody {
-	  background: #f0f0f0;
-		}
-	.dropdown-menu {
-	  padding: 0px;
-	  overflow: hidden;
-	}
-
-	.post-content {
-	  margin-left: 58px;
-	}
-
-	.badge-important {
-	  margin-top: 3px;
-	  margin-left: 25px;
-	  position: absolute;
-	}
-
-	body {
-	  background-color: #e8e8e8;
-	}
+.mainbody {
+ background: #f0f0f0;
+}
+.dropdown-menu {
+ padding: 0px;
+ overflow: hidden;
+}
+.post-content {
+ margin-left: 58px;
+}
+.badge-important {
+margin-top: 3px;
+margin-left: 25px;
+position: absolute;
+}
+body {
+background-color: #e8e8e8;
+}
 </style>

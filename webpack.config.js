@@ -1,99 +1,99 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
-    entry: './src/main.js',
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
-        filename: 'build.js'
-    },
-    module: {
-        rules: [{
-            test: /\.vue$/,
-            loader: 'vue-loader',
-            options: {
-                loaders: {
-                    // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-                    // the "scss" and "sass" values for the lang attribute to the right configs here.
-                    // other preprocessors should work out of the box, no loader config like this necessary.
-                    'scss': 'vue-style-loader!css-loader!sass-loader',
-                    'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-                }
-                // other vue-loader options go here
-            }
-        }, {
-            test: /\.js$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/
-        }, {
-            test: /\.css$/,
-            use: [
-              { loader: "style-loader" },
-              { loader: "css-loader" }
-            ]
-        }, {
-            test: /\.scss$/,
-            use: [{
-                loader: "style-loader" // creates style nodes from JS strings
-            }, {
-                loader: "css-loader" // translates CSS into CommonJS
-            }, {
-                loader: "sass-loader" // compiles Sass to CSS
-            }]
-        }, {
-           test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-           loader: "url-loader?limit=10000&mimetype=application/font-woff"
-        }, {
-           test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-           loader: "url-loader?limit=10000&mimetype=application/font-woff"
-        }, {
-           test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-           loader: "url-loader?limit=10000&mimetype=application/octet-stream"
-        }, {
-           test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-           loader: "file-loader"
-        }, {
-           test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-           loader: "file-loader?limit=10000&mimetype=image/svg+xml"
-        }, {
-            test: /\.(png|gif|jpg|svg|jpeg)$/i,
-            loader: "file-loader?name=images/[name].[ext]"
-        }]
-    },
-    resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js',
-            '@components': path.resolve(__dirname, './src/components')
+  entry: './src/main.js',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'build.js'
+  },
+  module: {
+    rules: [{
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
+          // the "scss" and "sass" values for the lang attribute to the right configs here.
+          // other preprocessors should work out of the box, no loader config like this necessary.
+          'scss': 'vue-style-loader!css-loader!sass-loader',
+          'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
         }
-    },
-    devServer: {
-        historyApiFallback: true,
-        noInfo: true
-    },
-    performance: {
-        hints: false
-    },
-    devtool: '#eval-source-map'
+        // other vue-loader options go here
+      }
+    }, {
+      test: /\.js$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/
+    }, {
+      test: /\.css$/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' }
+      ]
+    }, {
+      test: /\.scss$/,
+      use: [{
+        loader: 'style-loader' // creates style nodes from JS strings
+      }, {
+        loader: 'css-loader' // translates CSS into CommonJS
+      }, {
+        loader: 'sass-loader' // compiles Sass to CSS
+      }]
+    }, {
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+    }, {
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'url-loader?limit=10000&mimetype=application/font-woff'
+    }, {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
+    }, {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file-loader'
+    }, {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file-loader?limit=10000&mimetype=image/svg+xml'
+    }, {
+      test: /\.(png|gif|jpg|svg|jpeg)$/i,
+      loader: 'file-loader?name=images/[name].[ext]'
+    }]
+  },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@components': path.resolve(__dirname, './src/components')
+    }
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true
+  },
+  performance: {
+    hints: false
+  },
+  devtool: '#eval-source-map'
 }
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
-    // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
-    ])
+  module.exports.devtool = '#source-map'
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ])
 }
