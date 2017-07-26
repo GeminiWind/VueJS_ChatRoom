@@ -10,7 +10,7 @@ export default{
   methods: {
     logout () {
       this.$auth.destroyToken()
-      this.$router.push({ path: '/'})
+      this.$router.push({ path: '/' })
     }
   }
 }

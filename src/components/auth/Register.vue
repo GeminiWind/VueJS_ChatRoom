@@ -80,17 +80,18 @@ export default {
           password: this.user.password,
           gender: this.user.gender
         }
-        axios.post('/register', data).then(response => {
-          swal({
+        window.axios.post('/register', data).then(response => {
+          window.swal({
             title: 'Success!',
             text: 'Your account was created successfuly',
             type: 'success',
             confirmButtonText: 'OK'
           })
           // Redirect to login view
-          this.$router.push({ path: '/'})
+          this.$router.push({ path: '/' })
         }).catch(function (error) {
-          swal({
+          console.log(error)
+          window.swal({
             title: 'Whoops!',
             text: 'Look like something went wrongs!! Try again',
             type: 'error',

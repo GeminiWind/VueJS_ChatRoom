@@ -39,16 +39,16 @@ export default {
     forget () {
       this.$validator.validateAll()
       if (!this.errors.any()) {
-        axios.post('/forget', {email: this.email}).then(response => {
+        window.axios.post('/forget', {email: this.email}).then(response => {
           if (response.data.error == null) {
-            swal({
+            window.swal({
               title: 'Success!',
               text: 'An email was sent for your email! Please check it',
               type: 'success',
               confirmButtonText: 'OK'
             })
           } else {
-            swal({
+            window.swal({
               title: 'Whoops!',
               text: response.data.error,
               type: 'error',
@@ -56,7 +56,8 @@ export default {
             })
           }
         }).catch(function (error) {
-          swal({
+          console.log(error)
+          window.swal({
             title: 'Whoops!',
             text: 'Look like something went wrongs!! Try again',
             type: 'error',
