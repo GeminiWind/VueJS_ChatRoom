@@ -1,5 +1,4 @@
 export default function (Vue) {
-  let authenticatedUser = {}
   Vue.auth = {
     // set token
     setToken: (token, expiration) => {
@@ -23,7 +22,7 @@ export default function (Vue) {
     destroyToken: () => {
       localStorage.removeItem('token')
       localStorage.removeItem('expiration')
-      delete axios.defaults.headers.common['Authorization']
+      delete window.axios.defaults.headers.common['Authorization']
     },
     // isAuthenticated
     isAuthenticated: () => {
