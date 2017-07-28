@@ -1,5 +1,3 @@
-require('./bootstrap')
-
 import Vue from 'vue'
 import Auth from './services/Auth.js'
 import Router from './routes/routes.js'
@@ -9,11 +7,13 @@ import 'nprogress/nprogress.css'
 import VeeValidate from 'vee-validate'
 import Vodal from 'vodal'
 import vSelect from 'vue-select'
-var moment = require('moment')
 import Navbar from './components/Navbar.vue'
 import VueImgInputer from 'vue-img-inputer'
 import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
+
+require('./bootstrap')
+var moment = require('moment')
 
 Vue.use(Auth)
 Vue.use(VeeValidate)
@@ -28,7 +28,7 @@ Vue.component('Navbar', Navbar)
 Router.beforeEach((to, from, next) => {
   NProgress.start()
   if (Vue.auth.isAuthenticated()) {
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+    window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
   }
   if (to.matched.some(record => record.meta.forVisitor)) {
     if (Vue.auth.isAuthenticated()) {
@@ -60,7 +60,7 @@ Vue.filter('substring', (string, value) => {
   return string.substring(0, value) + '...'
 })
 
-const app = new Vue({
+new Vue({
   el: '#app',
   router: Router,
   store: store

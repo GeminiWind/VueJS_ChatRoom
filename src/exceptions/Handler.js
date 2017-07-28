@@ -4,7 +4,7 @@ export default class Hanlder {
   }
 
   showNotifiyError () {
-    swal({
+    window.swal({
       title: 'Whoops!',
       text: this.error,
       type: 'error',

@@ -19,11 +19,12 @@ export default {
   },
   actions: {
     getUser ({commit}) {
-      axios.get('/api/user').then(response => {
+      window.axios.get('/api/user').then(response => {
         commit(types.SET_USER, response.data.data)
-        socket.emit('login', response.data.data)
+        window.socket.emit('login', response.data.data)
       }).catch(function (error) {
-        swal({
+        console.log(error)
+        window.swal({
           title: 'Whoops!',
           text: 'Look like something went wrong',
           type: 'error',
