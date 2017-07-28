@@ -37,10 +37,6 @@ export default {
     fetchConversations ({ commit }) {
       window.axios.get('/api/messages').then(response => {
         commit(types.RECEIVE_CONVERSATIONS, response.data.data)
-        let conversations = response.data.data
-        conversations.forEach(function (conv) {
-          window.socket.emit('enter conversation', {conversationId: conv.conversationId})
-        })
       }).catch(function (error) {
         console.log(error)
         let errorhandler = new Handler('Look like something went wrong')
