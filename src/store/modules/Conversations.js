@@ -47,10 +47,10 @@ export default {
         errorhandler.showNotifiyError()
       })
     },
-    fetchConversationContent ({ commit }, payload) {
-      window.axios.get('/api/messages/' + payload.conversationId).then(response => {
+    fetchConversationContent ({ commit }, conversationId) {
+      window.axios.get('/api/messages/' + conversationId).then(response => {
         commit(types.RECEIVE_CONVERSATION_CONTENT, response.data.data)
-        commit(types.SET_CUR_CONVERSATION_ID, payload.conversationId)
+        commit(types.SET_CUR_CONVERSATION_ID, conversationId)
       }).catch(function (error) {
         console.log(error)
         let errorhandler = new Handler('Look like something went wrong')

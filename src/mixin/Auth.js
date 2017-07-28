@@ -1,10 +1,8 @@
+import { mapGetters } from 'vuex'
+
 export default {
-  computed: {
-    user () {
-      return this.$store.getters['auth/user']
-    }
-  },
-  created () {
+  computed: mapGetters({ user: 'auth/user' }),
+  beforeCreate () {
     this.$store.dispatch('auth/getUser')
   }
 }

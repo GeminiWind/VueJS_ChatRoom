@@ -166,6 +166,7 @@
 import InfiniteLoading from 'vue-infinite-loading'
 import NewMessage from './NewMessage.vue'
 import Auth from '../../mixin/Auth.js'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'chat',
   data () {
@@ -181,45 +182,42 @@ export default {
     NewMessage
   },
   mixins: [Auth],
-  computed: {
-    conversations () {
-      return this.$store.getters['conversations/allConversation']
-    },
-    currentConversation () {
-      return this.$store.getters['conversations/currentConversation']
-    },
-    currentConversationId () {
-      return this.$store.getters['conversations/currentConversationId']
-    }
-  },
+  computed: mapGetters({
+    conversations: 'conversations/allConversation',
+    currentConversation: 'conversations/currentConversation',
+    currentConversationId: 'conversations/currentConversationId'
+  }),
   created () {
     this.fetchConversations()
-    this.updateConversation()
+    this.update()
     this.getOnlineUser()
   },
   methods: {
-    fetchConversations () {
-      this.$store.dispatch('conversations/fetchConversations')
-    },
-    updateConversation () {
+    ...mapActions({
+      fetchConversations: 'conversations/fetchConversations',
+      fetchConversationContent: 'conversations/fetchConversationContent',
+      replyByText: 'conversations/replyConversation',
+      replyByImage: 'conversations/replyConversationImage',
+      newConversation: 'conversations/createConversation',
+      removeConversation: 'conversations/deleteConversation'
+    }),
+    update () {
       var self = this
       // if new message is belong to current conservation => push it
       window.socket.on('refresh message', function (message) {
         if (message.conversationId === self.currentConversationId) {
           self.currentConversation.push(message)
         }
-        self.$store.dispatch('conversations/fetchConversations')
+        self.fetchConversations()
       })
       // else updated snippet whenver new message
       window.socket.on('new message', function (data) {
-        self.$store.dispatch('conversations/fetchConversations')
+        self.fetchConversations()
       })
     },
-    fetchConversationContent (conversationId) {
-      this.$store.dispatch('conversations/fetchConversationContent', {conversationId: conversationId})
-    },
     replyConversation () {
-      this.$store.dispatch('conversations/replyConversation', {conversationId: this.currentConversationId, message: this.message})
+      let reply = {conversationId: this.currentConversationId, message: this.message}
+      this.replyByText(reply)
       this.fetchConversations()
       this.message = ''
     },
@@ -237,18 +235,18 @@ export default {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then(function () {
-        self.$store.dispatch('conversations/deleteConversation', {conversationId: self.currentConversationId})
-        self.$store.dispatch('conversations/fetchConversations')
+        self.removeConversation({conversationId: self.currentConversationId})
+        self.fetchConversations()
       })
     },
     createdNewConversation (payload) {
-      this.$store.dispatch('conversations/createConversation', payload)
+      this.newConversation(payload)
       this.fetchConversations()
     },
     fileChange (file, name) {
       var data = new FormData()
       data.append('picture', file)
-      this.$store.dispatch('conversations/replyConversationImage', {conversationId: this.currentConversationId, data: data})
+      this.replyByImage({conversationId: this.currentConversationId, data: data})
       this.fetchConversations()
       this.file = null
     },
