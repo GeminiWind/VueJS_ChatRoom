@@ -58,8 +58,11 @@
                                         </strong>
                                     </div>
                                     <div class="contact_sec">
-                                        <strong class="primary-font">
+                                        <strong class="primary-font" v-if="conversation.type === 'text'">
                                             {{conversation.body | substring(15)}}
+                                        </strong>
+                                        <strong class="primary-font" v-else>
+                                             {{conversation.author.fullName}} send an image
                                         </strong>
                                         <span class="badge pull-right">
                                             3
@@ -75,7 +78,7 @@
             <div class="col-sm-9 message_section">
                 <div class="row">
                     <div class="new_message_head">
-                        <NewMessage @conversationcreated="createdNewConversation"></NewMessage>
+                        <NewMessage @conversationcreated="createConversation"></NewMessage>
                         <div class="pull-right" v-if="currentConversation.length!==0">
                             <div class="dropdown">
                                 <button aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">
@@ -111,7 +114,7 @@
                                        {{message.body}}
                                     </p>
                                     <p v-else-if="message.type === 'image'">
-                                      <img :src="message.body" width="400px" height="180px">
+                                      <img :src="'http://localhost:8000/' + message.body" width="400px" height="180px">
                                     </p>
                                     <div class="chat_time pull-left">
                                        {{message.created_at | dateForHumans}}
@@ -129,7 +132,7 @@
                                        {{message.body}}
                                     </p>
                                     <p v-else-if="message.type === 'image'">
-                                      <img :src="message.body" width="400px" height="180px">
+                                      <img :src="'http://localhost:8000/' + message.body" width="400px" height="180px">
                                     </p>
                                     <div class="chat_time pull-right">
                                         {{message.created_at | dateForHumans}}
@@ -198,7 +201,7 @@ export default {
       fetchConversationContent: 'conversations/fetchConversationContent',
       replyByText: 'conversations/replyConversation',
       replyByImage: 'conversations/replyConversationImage',
-      newConversation: 'conversations/createConversation',
+      createConversation: 'conversations/createConversation',
       removeConversation: 'conversations/deleteConversation'
     }),
     update () {
@@ -218,7 +221,6 @@ export default {
     replyConversation () {
       let reply = {conversationId: this.currentConversationId, message: this.message}
       this.replyByText(reply)
-      this.fetchConversations()
       this.message = ''
     },
     searchConversation () {
@@ -236,18 +238,12 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then(function () {
         self.removeConversation({conversationId: self.currentConversationId})
-        self.fetchConversations()
       })
-    },
-    createdNewConversation (payload) {
-      this.newConversation(payload)
-      this.fetchConversations()
     },
     fileChange (file, name) {
       var data = new FormData()
       data.append('picture', file)
       this.replyByImage({conversationId: this.currentConversationId, data: data})
-      this.fetchConversations()
       this.file = null
     },
     getOnlineUser () {

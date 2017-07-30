@@ -56,8 +56,6 @@ export default {
     replyConversation ({ commit }, payload) {
       window.axios.post('/api/messages/' + payload.conversationId, {message: payload.message}).then(response => {
         commit(types.PUSH_NEW_MSG_IN_CUR_CONVERSATION, response.data.data)
-        let payloadSocket = {conversationId: payload.conversationId, message: response.data.data}
-        window.socket.emit('new message', payloadSocket)
       }).catch(function (error) {
         console.log(error)
         let errorhandler = new Handler('Look like something went wrong')
@@ -68,8 +66,6 @@ export default {
       let config = { headers: { 'Content-Type': 'multipart/form-data' } }
       window.axios.post('/api/messages/' + payload.conversationId, payload.data, config).then(response => {
         commit(types.PUSH_NEW_MSG_IN_CUR_CONVERSATION, response.data.data)
-        let payloadSocket = {conversationId: payload.conversationId, message: response.data.data}
-        window.socket.emit('new message', payloadSocket)
       }).catch(function (error) {
         console.log(error)
         let errorhandler = new Handler('Look like something went wrong')
@@ -107,8 +103,6 @@ export default {
             commit(types.PUSH_NEW_CONVERSATION, response.data.data)
           }
         })
-        let payloadSocket = {conversationId: response.data.data.conversationId, message: response.data.data}
-        window.socket.emit('new message', payloadSocket)
         window.swal({
           title: 'Success!',
           text: 'Your message was sent.',
