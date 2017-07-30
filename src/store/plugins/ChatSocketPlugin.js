@@ -1,4 +1,5 @@
 import * as types from '../mutation-types.js'
+import NewMessageWasCreated from '../../events/NewMessageWasCreated.js'
 
 export default function createChatSocketPlugin () {
   return store => {
@@ -30,7 +31,8 @@ export default function createChatSocketPlugin () {
             mutation.type === 'conversations/' + types.PUSH_NEW_CONVERSATION) {
           let message = mutation.payload
           let data = {conversationId: mutation.payload.conversationId, message: message}
-          window.socket.emit('new message', data)
+          let evt = new NewMessageWasCreated(data)
+          evt.dispatch()
         }
       }
     })
