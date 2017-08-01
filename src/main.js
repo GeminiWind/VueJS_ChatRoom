@@ -12,7 +12,7 @@ import VueImgInputer from 'vue-img-inputer'
 import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
 
-require('./bootstrap')
+require('../bootstrap/bootstrap')
 var moment = require('moment')
 
 Vue.use(Auth)
