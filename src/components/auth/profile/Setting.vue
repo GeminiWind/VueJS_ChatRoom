@@ -267,9 +267,7 @@
 </template>
 
 <script>
-import Auth from '../../../mixin/Auth.js'
 export default{
-  mixins: [Auth],
   data () {
     return {
       firstName: '',

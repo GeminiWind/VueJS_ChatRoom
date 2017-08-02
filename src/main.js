@@ -23,6 +23,8 @@ Vue.component('v-select', vSelect)
 Vue.component('VueImgInputer', VueImgInputer)
 Vue.component('Navbar', Navbar)
 
+Vue.config.silent = true
+
 Router.beforeEach((to, from, next) => {
   NProgress.start()
   if (store.getters['auth/isAuthenticated']) {
