@@ -135,7 +135,7 @@
                     <div class="media">
                         <div class="pull-left">
                             <a href="#">
-                                <img class="media-object img-circle" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="50px" height="50px">
+                                <img class="media-object img-circle" :src="user.avatarLink" width="50px" height="50px" v-if="user">
                             </a>
                         </div>
                         <div class="media-body">
@@ -455,7 +455,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  computed: {
+    ...mapState({
+      user: (state) => state.auth.profile
+    })
+  }
 }
 </script>
 

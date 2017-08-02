@@ -168,8 +168,7 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
 import NewMessage from './NewMessage.vue'
-import Auth from '../../mixin/Auth.js'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 export default {
   name: 'chat',
   data () {
@@ -184,12 +183,16 @@ export default {
     InfiniteLoading,
     NewMessage
   },
-  mixins: [Auth],
-  computed: mapGetters({
-    conversations: 'conversations/allConversation',
-    currentConversation: 'conversations/currentConversation',
-    currentConversationId: 'conversations/currentConversationId'
-  }),
+  computed: {
+    ...mapGetters({
+      conversations: 'conversations/allConversation',
+      currentConversation: 'conversations/currentConversation',
+      currentConversationId: 'conversations/currentConversationId'
+    }),
+    ...mapState({
+      user: (state) => state.auth.profile
+    })
+  },
   created () {
     this.fetchConversations()
     this.update()

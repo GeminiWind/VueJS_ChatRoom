@@ -2,11 +2,11 @@
   <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-          <vue-letter-avatar :name="user.profile.first_name" size='30' class="img-responsive img-circle" v-if="user.profile.avatarLink == null"/>
-          <vue-letter-avatar :name="user.profile.avatarLink" size='30' class="img-responsive img-circle" v-else/>
+        <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;" v-if="user">
+          <vue-letter-avatar :name="user.profile.first_name" size='30' class="img-responsive img-circle" v-if="user.avatarLink == null" />
+          <img :alt="user.fullName" class="img-responsive img-circle" height="30px" :src="user.avatarLink" :title="user.fullName" width="30px" v-else>
         </span>
-        <span class="user-name">
+        <span class="user-name" v-if="user">
         {{ user.fullName }}
         </span>
         <b class="caret">
@@ -16,16 +16,16 @@
         <li>
           <div class="navbar-content">
             <div class="row">
-              <div class="col-md-5">
-                <vue-letter-avatar :name="user.profile.first_name" size='120' class="img-responsive img-circle" v-if="user.profile.avatarLink == null"/>
-                <vue-letter-avatar :name="user.profile.avatarLink" size='120' class="img-responsive img-circle" v-else/>
+              <div class="col-md-5"  v-if="user">
+                <vue-letter-avatar :name="user.profile.first_name" size='120' class="img-responsive img-circle" v-if="user.avatarLink == null"/>
+                 <img :alt="user.fullName" class="img-responsive" height="120px" :src="user.avatarLink" width="120px"/>
                 <p class="text-center small">
-                  <a href="./3X6zm">
+                  <a href="#">
                   Change Photo
                   </a>
                 </p>
               </div>
-              <div class="col-md-7">
+              <div class="col-md-7"  v-if="user">
                 <span>
                 {{ user.fullName }}
                 </span>

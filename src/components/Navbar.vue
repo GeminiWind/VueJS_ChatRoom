@@ -15,13 +15,13 @@
                         <span class="icon-bar">
                         </span>
                     </button>
-                    <a class="navbar-brand" href="./ORqmj" style="margin-right:-8px; margin-top:-5px;">
+                    <router-link :to="{ path: '/' }" class="navbar-brand" style="margin-right:-8px; margin-top:-5px;">
                         <img alt="Brand" height="30px" src="https://lut.im/7trApsDX08/GeilMRp1FIm4f2p7.png" width="30px">
                         </img>
-                    </a>
-                    <a class="navbar-brand" href="./ORqmj">
+                    </router-link>
+                    <router-link :to="{ path: '/' }" class="navbar-brand" >
                         Dolphin
-                    </a>
+                    </router-link>
                     <i class="brand_network">
                         <small>
                             <small>
