@@ -1,4 +1,4 @@
-import Event from '../services/Event.js'
+import Event from '@services/Event.js'
 
 export default class NewMessageWasCreated extends Event {
   constructor (data) {

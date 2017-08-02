@@ -3,19 +3,21 @@ import Vuex from 'vuex'
 import {default as authModule} from './modules/Auth.js'
 import {default as conversationsModule} from './modules/Conversations.js'
 import createChatSocketPlugin from './plugins/ChatSocketPlugin.js'
+import createAuthSocketPlugin from './plugins/AuthSocketPlugin.js'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
 const chatSocketPlugin = createChatSocketPlugin()
+const authSocketPlugin = createAuthSocketPlugin()
 
 export default new Vuex.Store({
   modules: {
     auth: authModule,
     conversations: conversationsModule
   },
-  plugins: [chatSocketPlugin,
+  plugins: [chatSocketPlugin, authSocketPlugin,
     createPersistedState({
       paths: ['auth.token'],
       getState: (key) => Cookies.getJSON(key),

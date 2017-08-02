@@ -29,7 +29,9 @@ Router.beforeEach((to, from, next) => {
   NProgress.start()
   if (store.getters['auth/isAuthenticated']) {
     window.axios.defaults.headers.common['Authorization'] = store.state.auth.token
-  }
+  }/* else {
+    delete window.axios.defaults.headers.common['Authorization']
+  } */
   if (to.matched.some(record => record.meta.forVisitor)) {
     if (store.getters['auth/isAuthenticated']) {
       next({

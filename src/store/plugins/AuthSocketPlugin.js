@@ -1,11 +1,12 @@
 import * as types from '../mutation-types.js'
+import UserLoggedIn from '@events/UserLoggedIn.js'
 
-export default function createChatSocketPlugin () {
+export default function createAuthSocketPlugin () {
   return store => {
     store.subscribe((mutation, state) => {
-      // automatically subcirbe all conversation of authenticated user
-      if (mutation.type === 'conversations/' + types.RECEIVE_CONVERSATIONS) {
-
+      // fire event new user loggin application
+      if (mutation.type === 'auth/' + types.GET_PROFILE_SUCCESS) {
+      	new UserLoggedIn(mutation.payload).dispatch()
       }
     })
   }
