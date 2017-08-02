@@ -48,87 +48,7 @@
                             </router-link>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right" v-show="isAuth">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                    <img alt="John Doe" class="img-responsive img-circle" height="30px" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" title="John Doe" width="30px">
-                                    </img>
-                                </span>
-                                <span class="user-name">
-                                    John Doe
-                                </span>
-                                <b class="caret">
-                                </b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="navbar-content">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <img alt="Alternate Text" class="img-responsive" height="120px" src="https://lut.im/7JCpw12uUT/mY0Mb78SvSIcjvkf.png" width="120px"/>
-                                                <p class="text-center small">
-                                                    <a href="./3X6zm">
-                                                        Change Photo
-                                                    </a>
-                                                </p>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <span>
-                                                    John Doe
-                                                </span>
-                                                <p class="text-muted small">
-                                                    example@pods.tld
-                                                </p>
-                                                <div class="divider">
-                                                </div>
-                                                <router-link :to="{path:'/profile'}" class="btn btn-default btn-xs">
-                                                    <i aria-hidden="true" class="fa fa-user-o">
-                                                    </i>
-                                                    Profile
-                                                </router-link>
-                                                <a class="btn btn-default btn-xs" href="#">
-                                                    <i aria-hidden="true" class="fa fa-address-card-o">
-                                                    </i>
-                                                    Contacts
-                                                </a>
-                                                <router-link :to="{path:'/setting'}" class="btn btn-default btn-xs">
-                                                    <i aria-hidden="true" class="fa fa-cogs">
-                                                    </i>
-                                                    Settings
-                                                </router-link>
-                                                <a class="btn btn-default btn-xs" href="#">
-                                                    <i aria-hidden="true" class="fa fa-question-circle-o">
-                                                    </i>
-                                                    Help!
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="navbar-footer">
-                                        <div class="navbar-footer-content">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <a class="btn btn-default btn-sm" href="#">
-                                                        <i aria-hidden="true" class="fa fa-unlock-alt">
-                                                        </i>
-                                                        Change Passowrd
-                                                    </a>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <router-link :to="{ path: '/logout' }" class="btn btn-default btn-sm pull-right">
-                                                        <i aria-hidden="true" class="fa fa-power-off">
-                                                        </i>
-                                                        Sign Out
-                                                    </router-link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <Panel v-if="isAuth == true"></Panel>
                 </div>
             </div>
         </div>
@@ -137,12 +57,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import Panel from './auth/Panel.vue'
 export default {
+  components: {
+    Panel
+  },
   computed: {
-    isAuth () {
-      return this.$auth.isAuthenticated()
-    }
+    ...mapGetters({ isAuth: 'auth/isAuthenticated' })
   }
+
 }
 </script>
 
