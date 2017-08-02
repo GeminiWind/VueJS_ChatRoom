@@ -9,8 +9,9 @@ export default{
   },
   methods: {
     logout () {
-      this.$auth.destroyToken()
-      this.$router.push({ path: '/' })
+      this.$store.dispatch('auth/logout').then(() => {
+        this.$router.push({ path: '/' })
+      })
     }
   }
 }

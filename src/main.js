@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import Auth from './services/Auth.js'
 import Router from './routes/routes.js'
 import store from './store/store.js'
 import NProgress from 'nprogress'
@@ -15,7 +14,6 @@ import VueChatScroll from 'vue-chat-scroll'
 require('../bootstrap/bootstrap')
 var moment = require('moment')
 
-Vue.use(Auth)
 Vue.use(VeeValidate)
 Vue.use(VueLetterAvatar)
 Vue.use(VueChatScroll)
@@ -27,17 +25,17 @@ Vue.component('Navbar', Navbar)
 
 Router.beforeEach((to, from, next) => {
   NProgress.start()
-  if (Vue.auth.isAuthenticated()) {
-    window.axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+  if (store.getters['auth/isAuthenticated']) {
+    window.axios.defaults.headers.common['Authorization'] = store.state.auth.token
   }
   if (to.matched.some(record => record.meta.forVisitor)) {
-    if (Vue.auth.isAuthenticated()) {
+    if (store.getters['auth/isAuthenticated']) {
       next({
         path: '/feed'
       })
     } else next()
   } else if (to.matched.some(record => record.meta.forAuth)) {
-    if (!Vue.auth.isAuthenticated()) {
+    if (!store.getters['auth/isAuthenticated']) {
       next({
         path: '/'
       })

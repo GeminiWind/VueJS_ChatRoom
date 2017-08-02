@@ -12,12 +12,12 @@
                     <form @submit.prevent="login">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" name="email" placeholder="E-mail" type="text" v-validate="'required|email'" v-model=user.email>
+                                <input class="form-control" name="email" placeholder="E-mail" type="text" v-validate="'required|email'" v-model=email>
                                 </input>
                                 <div v-show="errors.has('email')" class="alert alert-danger">{{ errors.first('email') }}</div>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" name="password" placeholder="Password" type="password" value="" v-validate="'required|min:6'"v-model=user.password>
+                                <input class="form-control" name="password" placeholder="Password" type="password" value="" v-validate="'required|min:6'"v-model=password>
                                 </input>
                                  <div v-show="errors.has('password')" class="alert alert-danger">{{ errors.first('password') }}</div>
                             </div>
@@ -44,42 +44,35 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'login',
   data () {
     return {
-      user: {}
+      email: '',
+      password: ''
     }
   },
+  computed: mapState({
+    error: (state) => state.auth.error,
+    isAuthenticating: (state) => state.auth.isAuthenticating
+  }),
   methods: {
     login () {
       this.$validator.validateAll()
       if (!this.errors.any()) {
-        window.axios.post('/login', {email: this.user.email, password: this.user.password}).then(response => {
-          if (response.data.error == null) {
-            this.$auth.setToken(response.data.data.token, response.data.data.expiration * 1000 + Date.now())
-            this.$router.push({ path: '/feed' })
-          } else {
-            window.swal({
-              title: 'Whoops!',
-              text: response.data.error,
-              type: 'error',
-              confirmButtonText: 'OK'
-            })
-          }
-        }).catch(function (error) {
-          console.log(error)
-          window.swal({
-            title: 'Whoops!',
-            text: 'Look like something went wrongs!! Try again',
-            type: 'error',
-            confirmButtonText: 'OK'
-          })
+        if (this.isAuthenticating) {
+          return
+        }
+        this.$store.dispatch('auth/login', {
+          email: this.email,
+          password: this.password
+        }).then(() => {
+          this.$router.push({ path: '/feed' })
         })
       }
     }
   }
-
 }
 </script>
 
