@@ -456,7 +456,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import Auth from '../../mixins/Auth.js'
+import Auth from '../../mixins/Auth'
 export default {
   mixins: [Auth],
   computed: {

@@ -1,5 +1,5 @@
-import * as types from '../mutation-types.js'
-import Handler from '../../exceptions/Handler.js'
+import * as types from '../mutation-types'
+import Handler from '../../exceptions/Handler'
 
 export default {
   namespaced: true,
