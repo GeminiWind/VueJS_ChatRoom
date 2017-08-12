@@ -85,14 +85,15 @@
 
 <script>
 import { mapState } from 'vuex'
+import Auth from '../../mixins/Auth.js'
 export default {
+  mixins: [Auth],
   computed: {
     ...mapState({
       user: (state) => state.auth.profile
     })
   },
-  beforeCreate () {
-    console.log('LOL')
+  created () {
     if (this.$store.getters['auth/isAuthenticated'] && this.$store.state.auth.profile == null) {
       this.$store.dispatch('auth/getProfile').catch(err => {
         if (err.response.status < 400 || err.response.status >= 500) {

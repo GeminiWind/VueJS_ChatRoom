@@ -1,16 +1,15 @@
-import * as configs from '../config/app.js'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'sweetalert2/src/sweetalert2.scss'
 import 'vodal/common.css'
 import 'vodal/rotate.css'
+import axios from '@plugins/axios.js'
+import swal from '@plugins/swal.js'
+import socket from '@plugins/socket.js'
 require('font-awesome/css/font-awesome.css')
-window.axios = require('axios')
-window.axios.defaults.baseURL = configs.BASE_URL
+window.axios = axios
 // Swal2 for alert modal
-window.swal = require('sweetalert2')
+window.swal = swal
 // Socket-io Client
-window.io = require('socket.io-client')
-window.socket = window.io.connect(configs.BASE_URL)
+window.socket = socket
 // Jquery
 global.jQuery = global.$ = require('jquery')
 require('bootstrap')
