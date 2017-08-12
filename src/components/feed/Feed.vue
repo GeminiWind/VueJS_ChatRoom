@@ -456,7 +456,9 @@
 
 <script>
 import { mapState } from 'vuex'
+import Auth from '../../mixins/Auth.js'
 export default {
+  mixins: [Auth],
   computed: {
     ...mapState({
       user: (state) => state.auth.profile

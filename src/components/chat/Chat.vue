@@ -169,7 +169,9 @@
 import InfiniteLoading from 'vue-infinite-loading'
 import NewMessage from './NewMessage.vue'
 import { mapGetters, mapActions, mapState } from 'vuex'
+import Auth from '../../mixins/Auth.js'
 export default {
+  mixins: [Auth],
   name: 'chat',
   data () {
     return {

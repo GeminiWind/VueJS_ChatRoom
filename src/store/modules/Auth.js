@@ -42,21 +42,20 @@ const actions = {
   login: ({ commit, state }, cridential) => {
     return new Promise((resolve, reject) => {
       commit(types.LOGIN_REQUEST)
-      axios.post('/login', cridential).then(response => {
+      window.axios.post('/login', cridential).then(response => {
         if (response.data.error !== null) {
           commit(types.LOGIN_FAILURE, { error: response.data.error })
           return reject(response.data.error)
         }
-        console.log(response.data.data.token)
         commit(types.LOGIN_SUCCESS, response.data.data.token)
-        setTimeout(() => {
-          resolve()
-        }, 2000)
+        window.axios.defaults.headers.common['Authorization'] = response.data.data.token
+        resolve()
       })
     })
   },
   logout: ({ commit }) => {
     commit(types.LOGOUT)
+    delete window.axios.defaults.headers.common['Authorization']
     return Promise.resolve()
   },
   getProfile: ({ commit, dispatch, state }) => {
@@ -65,7 +64,7 @@ const actions = {
         // Do not load profile if it already exists in state.
         return resolve()
       }
-      axios.get('/api/user').then(response => {
+      window.axios.get('/api/user').then(response => {
         if (response.data.error != null) {
           commit(types.GET_PROFILE_FAILURE, { error: response.data.error })
           return reject(response.data.error)

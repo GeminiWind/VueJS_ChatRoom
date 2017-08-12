@@ -71,7 +71,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.esm.js',
       '@components': path.resolve(__dirname, './src/components'),
       '@events': path.resolve(__dirname, './src/events'),
-      '@services': path.resolve(__dirname, './src/services')
+      '@services': path.resolve(__dirname, './src/services'),
+      '@plugins': path.resolve(__dirname, './src/plugins')
     }
   },
   devServer: {
