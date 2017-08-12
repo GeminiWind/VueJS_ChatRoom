@@ -1,5 +1,5 @@
-import * as types from '../mutation-types.js'
-import NewMessageWasCreated from '@events/NewMessageWasCreated.js'
+import * as types from '../mutation-types'
+import NewMessageWasCreated from '@events/NewMessageWasCreated'
 
 export default function createChatSocketPlugin () {
   return store => {

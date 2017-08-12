@@ -1,4 +1,4 @@
-import Event from '@services/Event.js'
+import Event from '@services/Event'
 
 export default class UserLoggedIn extends Event {
   constructor (data) {

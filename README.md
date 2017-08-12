@@ -1,6 +1,6 @@
 # ChatRoom Application
 
-> A SPA Realtime Chat build by VueJS with Vuex and Vue Router
+> A SPA Realtime Chat build by VueJS.
 
 ## Build Setup
 

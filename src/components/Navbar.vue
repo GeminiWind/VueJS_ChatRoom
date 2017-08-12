@@ -58,7 +58,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Panel from './auth/Panel.vue'
+import Panel from './auth/Panel'
 export default {
   components: {
     Panel
