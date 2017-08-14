@@ -222,6 +222,9 @@ export default {
       window.socket.on('new message', function (data) {
         self.fetchConversations()
       })
+      window.socket.on('new conversation', function (data) {
+        self.fetchConversations()
+      })
     },
     replyConversation () {
       let reply = {conversationId: this.currentConversationId, message: this.message}
