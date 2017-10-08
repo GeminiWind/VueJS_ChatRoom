@@ -19,7 +19,7 @@ export default new Vuex.Store({
   },
   plugins: [chatSocketPlugin, authSocketPlugin,
     createPersistedState({
-      paths: ['auth.token'],
+      paths: ['auth.token', 'auth.expirationAt'],
       getState: (key) => Cookies.getJSON(key),
       setState: (key, state) => Cookies.set(key, state, { expires: 30 })
     })]

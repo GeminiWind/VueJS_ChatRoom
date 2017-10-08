@@ -77,5 +77,5 @@ export default {
 </script>
 
 <style scoped>
-body{padding-top:20px;}
+  body{padding-top:20px;}
 </style>

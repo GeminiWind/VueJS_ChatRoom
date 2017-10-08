@@ -3,6 +3,7 @@ import * as types from '../mutation-types'
 const state = {
   error: null,
   token: null,
+  expirationAt: null,
   isAuthenticating: false,
   profile: null
 }
@@ -17,9 +18,10 @@ const mutations = {
     state.isAuthenticating = false
   },
 
-  [types.LOGIN_SUCCESS] (state, token) {
+  [types.LOGIN_SUCCESS] (state, { token, expiration }) {
     state.token = token
     state.error = null
+    state.expirationAt = Date.now() + parseInt(expiration)
     state.isAuthenticating = false
   },
 
@@ -47,7 +49,7 @@ const actions = {
           commit(types.LOGIN_FAILURE, { error: response.data.error })
           return reject(response.data.error)
         }
-        commit(types.LOGIN_SUCCESS, response.data.data.token)
+        commit(types.LOGIN_SUCCESS, { token: response.data.data.token, expiration: response.data.data.expiration })
         window.axios.defaults.headers.common['Authorization'] = response.data.data.token
         resolve()
       })
@@ -81,7 +83,12 @@ const actions = {
 }
 
 const getters = {
-  isAuthenticated: (state) => typeof state.token === 'string'
+  isAuthenticated: (state) => {
+    if (state.token && state.expirationAt > Date.now()) {
+      return true
+    }
+    return false
+  }
 }
 
 export default {
