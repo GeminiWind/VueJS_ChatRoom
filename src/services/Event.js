@@ -1,7 +1,7 @@
 export default class Event {
   constructor (data, chanel) {
-    this.data = data,
     this.broadcastOn = chanel
+    this.data = data
   }
   setData (data) {
     this.data = data
