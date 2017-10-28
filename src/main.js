@@ -59,6 +59,7 @@ Vue.filter('substring', (string, value) => {
   return string.substring(0, value) + '...'
 })
 
+// eslint-disable-next-line
 new Vue({
   el: '#app',
   router: Router,
