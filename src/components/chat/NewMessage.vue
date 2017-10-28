@@ -35,7 +35,7 @@ export default {
   methods: {
     getOptions (search, loading) {
       loading(true)
-      window.axios.get('api/user/friends/search?name=' + search).then(resp => {
+      this.$http.get('api/user/friends/search?name=' + search).then(resp => {
         this.options = resp.data.data
         loading(false)
       })
