@@ -39,7 +39,7 @@ export default {
     forget () {
       this.$validator.validateAll()
       if (!this.errors.any()) {
-        window.axios.post('/forget', {email: this.email}).then(response => {
+        this.$http.post('/forget', {email: this.email}).then(response => {
           if (response.data.error == null) {
             window.swal({
               title: 'Success!',

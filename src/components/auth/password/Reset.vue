@@ -44,7 +44,7 @@ export default {
     eset () {
       this.$validator.validateAll()
       if (!this.errors.any()) {
-        window.axios.post('/reset/' + this.$route.params.token, {password: this.password}).then(response => {
+        this.$http.post('/reset/' + this.$route.params.token, {password: this.password}).then(response => {
           window.swal({
             title: 'Success!',
             text: 'Your password was saved',

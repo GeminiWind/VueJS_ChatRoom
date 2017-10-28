@@ -80,7 +80,7 @@ export default {
           password: this.user.password,
           gender: this.user.gender
         }
-        window.axios.post('/register', data).then(response => {
+        this.$http.post('/register', data).then(response => {
           window.swal({
             title: 'Success!',
             text: 'Your account was created successfuly',

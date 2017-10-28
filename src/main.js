@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import VueImgInputer from 'vue-img-inputer'
 import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
+import { default as Http } from '@plugins/axios'
 
 require('../bootstrap/bootstrap')
 var moment = require('moment')
@@ -17,6 +18,7 @@ var moment = require('moment')
 Vue.use(VeeValidate)
 Vue.use(VueLetterAvatar)
 Vue.use(VueChatScroll)
+Vue.use(Http)
 
 Vue.component(Vodal.name, Vodal)
 Vue.component('v-select', vSelect)
