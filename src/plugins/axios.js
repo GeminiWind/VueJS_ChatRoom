@@ -5,8 +5,7 @@ import axios from 'axios'
 export default {
   install: function (Vue, baseURL = configs.BASE_URL) {
     window.axios = axios.create({
-      baseURL: baseURL,
-      timeout: 5000
+      baseURL: baseURL
     })
     // axiosInstance.getInstance = () => {
     //   return axiosInstance

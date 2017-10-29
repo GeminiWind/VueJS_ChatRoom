@@ -1,8 +1,4 @@
 import Vue from 'vue'
-import Router from './routes/routes.js'
-import store from './store/store.js'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
 import VeeValidate from 'vee-validate'
 import Vodal from 'vodal'
 import vSelect from 'vue-select'
@@ -11,9 +7,11 @@ import VueImgInputer from 'vue-img-inputer'
 import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
 import { default as Http } from '@plugins/axios'
+import store from './store/store.js'
+import Router from './routes'
 
 require('../bootstrap/bootstrap')
-var moment = require('moment')
+const moment = require('moment')
 
 Vue.use(VeeValidate)
 Vue.use(VueLetterAvatar)
@@ -27,27 +25,7 @@ Vue.component('Navbar', Navbar)
 
 Vue.config.silent = true
 
-Router.beforeEach((to, from, next) => {
-  NProgress.start()
-  if (to.matched.some(record => record.meta.forVisitor)) {
-    if (store.getters['auth/isAuthenticated']) {
-      next({
-        path: '/feed'
-      })
-    } else next()
-  } else if (to.matched.some(record => record.meta.forAuth)) {
-    if (!store.getters['auth/isAuthenticated']) {
-      next({
-        path: '/'
-      })
-    } else {
-      next()
-    }
-  } else next()
-})
-Router.afterEach((to, from) => {
-  NProgress.done()
-})
+
 // Filter 
 Vue.filter('dateForHumans', (date) => {
   return moment(date).format('ddd, h:mm A')
