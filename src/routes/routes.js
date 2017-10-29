@@ -10,7 +10,9 @@ import Email from '@components/auth/password/Email'
 import Reset from '@components/auth/password/Reset'
 import Feed from '@components/feed/Feed'
 import PageNotFound from '@components/404'
+
 Vue.use(VueRouter)
+
 const router = new VueRouter({
   routes: [{
     path: '/',
