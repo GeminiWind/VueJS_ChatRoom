@@ -212,17 +212,17 @@ export default {
     update () {
       var self = this
       // if new message is belong to current conservation => push it
-      window.socket.on('refresh message', function (message) {
+      this.$socket.on('refresh message', function (message) {
         if (message.conversationId === self.currentConversationId) {
           self.currentConversation.push(message)
         }
         self.fetchConversations()
       })
       // else updated snippet whenver new message
-      window.socket.on('new message', function (data) {
+      this.$socket.on('new message', function (data) {
         self.fetchConversations()
       })
-      window.socket.on('new conversation', function (data) {
+      this.$socket.on('new conversation', function (data) {
         self.fetchConversations()
       })
     },
@@ -256,7 +256,7 @@ export default {
     },
     getOnlineUser () {
       var self = this
-      window.socket.on('user online list', function (data) {
+      this.$socket.on('user online list', function (data) {
         console.log(data)
         self.onlineUsers = data
       })
