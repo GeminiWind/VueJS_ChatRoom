@@ -6,7 +6,8 @@ import Navbar from './components/Navbar'
 import VueImgInputer from 'vue-img-inputer'
 import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
-import { default as Http } from '@plugins/axios'
+import Http from '@plugins/axios'
+import Socket from '@plugins/socket'
 import store from './store/store.js'
 import Router from './routes'
 
@@ -17,6 +18,7 @@ Vue.use(VeeValidate)
 Vue.use(VueLetterAvatar)
 Vue.use(VueChatScroll)
 Vue.use(Http)
+Vue.use(Socket)
 
 Vue.component(Vodal.name, Vodal)
 Vue.component('v-select', vSelect)
@@ -25,8 +27,7 @@ Vue.component('Navbar', Navbar)
 
 Vue.config.silent = true
 
-
-// Filter 
+// Filter
 Vue.filter('dateForHumans', (date) => {
   return moment(date).format('ddd, h:mm A')
 })
