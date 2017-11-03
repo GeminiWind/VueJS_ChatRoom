@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -76,6 +77,9 @@ module.exports = {
       '@plugins': path.resolve(__dirname, './src/plugins')
     }
   },
+  plugins: [
+    new DashboardPlugin()
+  ],
   devServer: {
     historyApiFallback: true,
     noInfo: true
