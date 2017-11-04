@@ -1,5 +1,4 @@
 import * as types from '../mutation-types'
-import Handler from '../../exceptions/Handler'
 
 export default {
   namespaced: true,
@@ -39,8 +38,7 @@ export default {
         commit(types.RECEIVE_CONVERSATIONS, response.data.data)
       }).catch(function (error) {
         console.log(error)
-        let errorhandler = new Handler('Look like something went wrong')
-        errorhandler.showNotifiyError()
+        window.swal.error('Whoops', 'Look like something went wrong')
       })
     },
     fetchConversationContent ({ commit }, conversationId) {
@@ -49,8 +47,7 @@ export default {
         commit(types.SET_CUR_CONVERSATION_ID, conversationId)
       }).catch(function (error) {
         console.log(error)
-        let errorhandler = new Handler('Look like something went wrong')
-        errorhandler.showNotifiyError()
+        window.swal.error('Whoops', 'Look like something went wrong')
       })
     },
     replyConversation ({ commit }, payload) {
@@ -58,8 +55,7 @@ export default {
         commit(types.PUSH_NEW_MSG_IN_CUR_CONVERSATION, response.data.data)
       }).catch(function (error) {
         console.log(error)
-        let errorhandler = new Handler('Look like something went wrong')
-        errorhandler.showNotifiyError()
+        window.swal.error('Whoops', 'Look like something went wrong')
       })
     },
     replyConversationImage ({ commit }, payload) {
@@ -68,8 +64,7 @@ export default {
         commit(types.PUSH_NEW_MSG_IN_CUR_CONVERSATION, response.data.data)
       }).catch(function (error) {
         console.log(error)
-        let errorhandler = new Handler('Look like something went wrong')
-        errorhandler.showNotifiyError()
+        window.swal.error('Whoops', 'Look like something went wrong')
       })
     },
     deleteConversation ({ commit, state }, payload) {
@@ -86,8 +81,7 @@ export default {
         })
       }).catch(function (error) {
         console.log(error)
-        let errorhandler = new Handler('Look like something went wrong')
-        errorhandler.showNotifiyError()
+        window.swal.error('Whoops', 'Look like something went wrong')
       })
     },
     createConversation ({ commit, state }, payload) {
@@ -111,8 +105,7 @@ export default {
         })
       }).catch(function (error) {
         console.log(error)
-        let errorhandler = new Handler('Look like something went wrong')
-        errorhandler.showNotifiyError()
+        window.swal.error('Whoops', 'Look like something went wrong')
       })
     }
   }

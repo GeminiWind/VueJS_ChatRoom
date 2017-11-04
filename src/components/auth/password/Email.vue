@@ -41,28 +41,12 @@ export default {
       if (!this.errors.any()) {
         this.$http.post('/forget', {email: this.email}).then(response => {
           if (response.data.error == null) {
-            window.swal({
-              title: 'Success!',
-              text: 'An email was sent for your email! Please check it',
-              type: 'success',
-              confirmButtonText: 'OK'
-            })
+            this.$swal.success('Success!', 'An email was sent for your email! Please check it')
           } else {
-            window.swal({
-              title: 'Whoops!',
-              text: response.data.error,
-              type: 'error',
-              confirmButtonText: 'OK'
-            })
+            this.$swal.error('Whoops!',response.data.error)
           }
         }).catch(function (error) {
-          console.log(error)
-          window.swal({
-            title: 'Whoops!',
-            text: 'Look like something went wrongs!! Try again',
-            type: 'error',
-            confirmButtonText: 'OK'
-          })
+           this.$swal.error('Whoops!',response.data.error)
         })
       }
     }

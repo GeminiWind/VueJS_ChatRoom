@@ -81,22 +81,12 @@ export default {
           gender: this.user.gender
         }
         this.$http.post('/register', data).then(response => {
-          window.swal({
-            title: 'Success!',
-            text: 'Your account was created successfuly',
-            type: 'success',
-            confirmButtonText: 'OK'
-          })
+          this.$swal.success('Success!','Your account was created successfuly')
           // Redirect to login view
           this.$router.push({ path: '/' })
         }).catch(function (error) {
           console.log(error)
-          window.swal({
-            title: 'Whoops!',
-            text: 'Look like something went wrongs!! Try again',
-            type: 'error',
-            confirmButtonText: 'OK'
-          })
+          this.$swal.error('Whoops!','Look like something went wrongs!! Try again')
         })
       }
     }
