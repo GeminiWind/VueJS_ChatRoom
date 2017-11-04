@@ -236,7 +236,7 @@ export default {
     },
     deleteConversation () {
       var self = this
-      window.swal({
+      this.$swal({
         title: 'Are you sure to delete this conversation',
         text: "You won't be able to revert this!",
         type: 'warning',

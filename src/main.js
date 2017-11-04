@@ -8,6 +8,7 @@ import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
 import Http from '@plugins/axios'
 import Socket from '@plugins/socket'
+import Swal from '@plugins/swal'
 import store from './store/store.js'
 import Router from './routes'
 
@@ -19,6 +20,7 @@ Vue.use(VueLetterAvatar)
 Vue.use(VueChatScroll)
 Vue.use(Http)
 Vue.use(Socket)
+Vue.use(Swal)
 
 Vue.component(Vodal.name, Vodal)
 Vue.component('v-select', vSelect)
