@@ -83,4 +83,12 @@ const router = new VueRouter({
     component: PageNotFound
   }]
 })
+
+// define custom middleware function
+router.middlewares = (middlewares) => {
+  middlewares.forEach(middleware => {
+    middleware(router)
+  })
+}
+
 export default router

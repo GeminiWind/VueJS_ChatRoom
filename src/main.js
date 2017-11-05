@@ -6,11 +6,9 @@ import Navbar from './components/Navbar'
 import VueImgInputer from 'vue-img-inputer'
 import VueLetterAvatar from 'vue-letter-avatar'
 import VueChatScroll from 'vue-chat-scroll'
-import Http from '@plugins/axios'
-import Socket from '@plugins/socket'
-import Swal from '@plugins/swal'
 import store from './store/store.js'
 import Router from './routes'
+import { Http, Socket, Swal } from '@plugins'
 
 require('../bootstrap/bootstrap')
 const moment = require('moment')
