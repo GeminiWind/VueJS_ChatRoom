@@ -45,12 +45,12 @@ export default {
       this.$validator.validateAll()
       if (!this.errors.any()) {
         this.$http.post('/reset/' + this.$route.params.token, {password: this.password}).then(response => {
-          this.$swal.success('Success!','Your password saved')
+          this.$swal.success('Success!', 'Your password saved')
           // Redirect to login view
           this.$router.push({ path: '/' })
         }).catch(function (error) {
           console.log(error)
-          this.$swal.error('Whoops!',response.data.error)
+          this.$swal.error('Whoops!', error)
         })
       }
     }
