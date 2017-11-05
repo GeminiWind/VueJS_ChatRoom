@@ -1,20 +1,22 @@
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="GeminiWind">
-	<meta name="keyword" content="ChatRoom, Realtime, NodeJS">
-	<title>Dolphin</title>
-</head>
-<body>
-	<div id="app" class="mainbody container-fluid">
-		<div class="row">
-			<Navbar></Navbar>
-			 <div style="padding-top:50px;"> </div>
-			<!-- Display view component -->
-			<router-view></router-view>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="GeminiWind">
+		<meta name="keyword" content="ChatRoom, Realtime, NodeJS">
+		<title>Dolphin</title>
+	</head>
+	<body>
+		<div id="app" class="mainbody container-fluid">
+			<div class="row">
+				<Navbar></Navbar>
+				 <div style="padding-top:50px;"> </div>
+				<!-- Display view component -->
+				<router-view></router-view>
+			</div>
 		</div>
-	</div>
-	<!-- App JS -->
-	 <script src="/dist/build.js"></script>
-</body>
+	</body>
+	<script src="/dist/build.js"></script>
+</html>

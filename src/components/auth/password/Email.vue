@@ -43,10 +43,10 @@ export default {
           if (response.data.error == null) {
             this.$swal.success('Success!', 'An email was sent for your email! Please check it')
           } else {
-            this.$swal.error('Whoops!',response.data.error)
+            this.$swal.error('Whoops!', response.data.error)
           }
         }).catch(function (error) {
-           this.$swal.error('Whoops!',response.data.error)
+          this.$swal.error('Whoops!', error)
         })
       }
     }

@@ -5,8 +5,8 @@
   "author": "GeminiWind <gemini.wind285@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --open --hot --config config/webpack/dev.config.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config config/webpack/prod.config.js",
     "precommit": "npm run lint",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
@@ -40,6 +40,7 @@
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
+    "co": "^4.6.0",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.2.4",
     "css-loader": "^0.25.0",
@@ -55,6 +56,7 @@
     "file-loader": "^0.9.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^5.0.1",
+    "style-ext-html-webpack-plugin": "^3.4.3",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
     "vue-img-inputer": "^1.1.0",
@@ -62,6 +64,7 @@
     "vue-template-compiler": "^2.4.2",
     "webpack": "^2.7.0",
     "webpack-dashboard": "^1.0.0",
-    "webpack-dev-server": "^2.6.0"
+    "webpack-dev-server": "^2.6.0",
+    "webpack-merge": "^4.1.1"
   }
 }
