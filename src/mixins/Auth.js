@@ -1,7 +1,7 @@
 export default {
-  beforeCreate () {
+  beforeCreate() {
     if (this.$store.getters['auth/isAuthenticated']) {
-      this.$http.defaults.headers.common['Authorization'] = this.$store.state.auth.token
+      this.$http.defaults.headers.common.Authorization = this.$store.state.auth.token;
     }
-  }
-}
+  },
+};

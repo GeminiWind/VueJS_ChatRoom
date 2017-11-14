@@ -38,6 +38,6 @@
 
 <script type="text/babel">
 export default{
-  name: 'PageNotFound'
-}
+  name: 'PageNotFound',
+};
 </script>

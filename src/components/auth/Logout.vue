@@ -4,15 +4,15 @@
 
 <script>
 export default{
-  created () {
-    this.logout()
+  created() {
+    this.logout();
   },
   methods: {
-    logout () {
+    logout() {
       this.$store.dispatch('auth/logout').then(() => {
-        this.$router.push({ path: '/' })
-      })
-    }
-  }
-}
+        this.$router.push({ path: '/' });
+      });
+    },
+  },
+};
 </script>
