@@ -1,10 +1,10 @@
-import * as configs from '../../config/app'
+import BASE_URL from '../../config/app';
 
-let io = require('socket.io-client')
+const io = require('socket.io-client');
 
 export default {
-  install: function (Vue, baseURL = configs.BASE_URL) {
-    window.socket = io.connect(configs.BASE_URL)
-    Object.defineProperty(Vue.prototype, '$socket', { value: window.socket })
-  }
-}
+  install(Vue, baseURL = BASE_URL) {
+    window.socket = io.connect(baseURL);
+    Object.defineProperty(Vue.prototype, '$socket', { value: window.socket });
+  },
+};

@@ -1,12 +1,12 @@
-import * as configs from '../../config/app'
+import axios from 'axios';
 
-import axios from 'axios'
+import BASE_URL from '../../config/app';
 
 export default {
-  install: function (Vue, baseURL = configs.BASE_URL) {
+  install(Vue, baseURL = BASE_URL) {
     window.axios = axios.create({
-      baseURL: baseURL
-    })
+      baseURL,
+    });
     // axiosInstance.getInstance = () => {
     //   return axiosInstance
     // }
@@ -16,6 +16,6 @@ export default {
     // axiosInstance.deleteAuthorization = () => {
     //   delete axiosInstance.defaults.headers.common['Authorization']
     // }
-    Object.defineProperty(Vue.prototype, '$http', { value: window.axios })
-  }
-}
+    Object.defineProperty(Vue.prototype, '$http', { value: window.axios });
+  },
+};

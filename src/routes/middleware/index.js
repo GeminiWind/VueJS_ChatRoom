@@ -1,4 +1,4 @@
-import { auth } from './auth'
-import { loadingBar } from './loadingBar'
+import auth from './auth';
+import loadingBar from './loadingBar';
 
-export { auth, loadingBar }
+export { auth, loadingBar };

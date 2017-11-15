@@ -35,28 +35,26 @@
 <script>
 export default {
   name: 'reset',
-  data () {
+  data() {
     return {
-      password: ''
-    }
+      password: '',
+    };
   },
   methods: {
-    eset () {
-      this.$validator.validateAll()
+    eset() {
+      this.$validator.validateAll();
       if (!this.errors.any()) {
-        this.$http.post('/reset/' + this.$route.params.token, {password: this.password}).then(response => {
-          this.$swal.success('Success!', 'Your password saved')
+        this.$http.post(`/reset/${this.$route.params.token}`, { password: this.password }).then(() => {
+          this.$swal.success('Success!', 'Your password saved');
           // Redirect to login view
-          this.$router.push({ path: '/' })
-        }).catch(function (error) {
-          console.log(error)
-          this.$swal.error('Whoops!', error)
-        })
+          this.$router.push({ path: '/' });
+        }).catch((error) => {
+          this.$swal.error('Whoops!', error);
+        });
       }
-    }
-  }
-
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

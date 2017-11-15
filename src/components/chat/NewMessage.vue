@@ -24,25 +24,25 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       options: null,
       compose: false,
       receiver: null,
-      newMessage: ''
-    }
+      newMessage: '',
+    };
   },
   methods: {
-    getOptions (search, loading) {
-      loading(true)
-      this.$http.get('api/user/friends/search?name=' + search).then(resp => {
-        this.options = resp.data.data
-        loading(false)
-      })
+    getOptions(search, loading) {
+      loading(true);
+      this.$http.get(`api/user/friends/search?name=${search}`).then((resp) => {
+        this.options = resp.data.data;
+        loading(false);
+      });
     },
-    submitData () {
-      this.$emit('conversationcreated', {receiver: this.receiver, body: this.newMessage})
-    }
-  }
-}
+    submitData() {
+      this.$emit('conversationcreated', { receiver: this.receiver, body: this.newMessage });
+    },
+  },
+};
 </script>

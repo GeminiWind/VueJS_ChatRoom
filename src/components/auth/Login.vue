@@ -44,36 +44,37 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+
 export default {
   name: 'login',
-  data () {
+  data() {
     return {
       email: '',
-      password: ''
-    }
+      password: '',
+    };
   },
   computed: mapState({
-    error: (state) => state.auth.error,
-    isAuthenticating: (state) => state.auth.isAuthenticating
+    error: state => state.auth.error,
+    isAuthenticating: state => state.auth.isAuthenticating,
   }),
   methods: {
-    login () {
-      this.$validator.validateAll()
+    login() {
+      this.$validator.validateAll();
       if (!this.errors.any()) {
         if (this.isAuthenticating) {
-          return
+          return;
         }
         this.$store.dispatch('auth/login', {
           email: this.email,
-          password: this.password
+          password: this.password,
         }).then(() => {
-          this.$router.push({ path: '/feed' })
-        })
+          this.$router.push({ path: '/feed' });
+        });
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

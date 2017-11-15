@@ -1,24 +1,24 @@
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export default {
-  install: function (Vue) {
+  install(Vue) {
     swal.success = (title, text, confirmButtonText = 'OK') => {
       swal({
-        title: title,
-        text: text,
+        title,
+        text,
         type: 'success',
-        confirmButtonText: confirmButtonText
-      })
-    }
+        confirmButtonText,
+      });
+    };
     swal.error = (title, text, confirmButtonText = 'OK') => {
       swal({
-        title: title,
-        text: text,
+        title,
+        text,
         type: 'error',
-        confirmButtonText: confirmButtonText
-      })
-    }
-    window.swal = swal
-    Object.defineProperty(Vue.prototype, '$swal', { value: swal })
-  }
-}
+        confirmButtonText,
+      });
+    };
+    window.swal = swal;
+    Object.defineProperty(Vue.prototype, '$swal', { value: swal });
+  },
+};

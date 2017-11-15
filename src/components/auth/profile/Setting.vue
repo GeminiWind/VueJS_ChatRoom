@@ -268,15 +268,15 @@
 
 <script>
 export default{
-  data () {
+  data() {
     return {
       firstName: '',
       lastName: '',
       bio: '',
-      location: ''
-    }
-  }
-}
+      location: '',
+    };
+  },
+};
 </script>
 
 <style scope lang="scss">

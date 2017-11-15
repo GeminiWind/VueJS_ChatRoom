@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --open --hot --config config/webpack/dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config config/webpack/prod.config.js",
     "precommit": "npm run lint",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "lint": "eslint --ext .js, .vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -44,13 +44,14 @@
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.2.4",
     "css-loader": "^0.25.0",
-    "eslint": "^4.3.0",
-    "eslint-config-standard": "^10.2.1",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^2.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.9.0",
