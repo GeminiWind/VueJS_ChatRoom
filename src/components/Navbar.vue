@@ -57,17 +57,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Panel from './auth/Panel'
+import { mapGetters } from 'vuex';
+import Panel from '@components/auth/Panel';
+
 export default {
   components: {
-    Panel
+    Panel,
   },
   computed: {
-    ...mapGetters({ isAuth: 'auth/isAuthenticated' })
-  }
+    ...mapGetters({ isAuth: 'auth/isAuthenticated' }),
+  },
 
-}
+};
 </script>
 
 <style scope lang="scss">

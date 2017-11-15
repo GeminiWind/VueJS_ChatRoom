@@ -20,7 +20,7 @@
                                 <input class="form-control" name="lastName" placeholder="Your Last Name" type="text" v-model=user.lastName v-validate="'required'">
                                 </input>
                                  <div v-show="errors.has('lastName')" class="alert alert-danger">{{ errors.first('lastName') }}</div>
-                            </div>	
+                            </div>
                             <div class="form-group">
                                 <input class="form-control" name="email" placeholder="Your E-mail" type="text" v-model=user.email v-validate="'required|email'">
                                 </input>
@@ -65,34 +65,34 @@
 <script>
 export default {
   name: 'register',
-  data () {
+  data() {
     return {
-      user: {}
-    }
+      user: {},
+    };
   },
   methods: {
-    register () {
-      this.$validator.validateAll()
+    register() {
+      this.$validator.validateAll();
       if (!this.errors.any()) {
-        let data = {first_name: this.user.firstName,
+        const data = {
+          first_name: this.user.firstName,
           last_name: this.user.lastName,
           email: this.user.email,
           password: this.user.password,
-          gender: this.user.gender
-        }
-        this.$http.post('/register', data).then(response => {
-          this.$swal.success('Success!', 'Your account was created successfuly')
+          gender: this.user.gender,
+        };
+        this.$http.post('/register', data).then(() => {
+          this.$swal.success('Success!', 'Your account was created successfuly');
           // Redirect to login view
-          this.$router.push({ path: '/' })
-        }).catch(function (error) {
-          console.log(error)
-          this.$swal.error('Whoops!', 'Look like something went wrongs!! Try again')
-        })
+          this.$router.push({ path: '/' });
+        }).catch(() => {
+          // console.log(error);
+          this.$swal.error('Whoops!', 'Look like something went wrongs!! Try again');
+        });
       }
-    }
-  }
-
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

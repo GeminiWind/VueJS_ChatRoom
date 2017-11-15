@@ -166,39 +166,40 @@
 </template>
 
 <script>
-import InfiniteLoading from 'vue-infinite-loading'
-import NewMessage from './NewMessage'
-import { mapGetters, mapActions, mapState } from 'vuex'
-import Auth from '../../mixins/Auth'
+import { mapGetters, mapActions, mapState } from 'vuex';
+import InfiniteLoading from 'vue-infinite-loading';
+import NewMessage from './NewMessage';
+import Auth from '../../mixins/Auth';
+
 export default {
   mixins: [Auth],
   name: 'chat',
-  data () {
+  data() {
     return {
       message: '',
       keyword: '',
       file: null,
-      onlineUsers: {}
-    }
+      onlineUsers: {},
+    };
   },
   components: {
     InfiniteLoading,
-    NewMessage
+    NewMessage,
   },
   computed: {
     ...mapGetters({
       conversations: 'conversations/allConversation',
       currentConversation: 'conversations/currentConversation',
-      currentConversationId: 'conversations/currentConversationId'
+      currentConversationId: 'conversations/currentConversationId',
     }),
     ...mapState({
-      user: (state) => state.auth.profile
-    })
+      user: state => state.auth.profile,
+    }),
   },
-  created () {
-    this.fetchConversations()
-    this.update()
-    this.getOnlineUser()
+  created() {
+    this.fetchConversations();
+    this.update();
+    this.getOnlineUser();
   },
   methods: {
     ...mapActions({
@@ -207,35 +208,35 @@ export default {
       replyByText: 'conversations/replyConversation',
       replyByImage: 'conversations/replyConversationImage',
       createConversation: 'conversations/createConversation',
-      removeConversation: 'conversations/deleteConversation'
+      removeConversation: 'conversations/deleteConversation',
     }),
-    update () {
-      var self = this
+    update() {
+      const self = this;
       // if new message is belong to current conservation => push it
-      this.$socket.on('refresh message', function (message) {
+      this.$socket.on('refresh message', (message) => {
         if (message.conversationId === self.currentConversationId) {
-          self.currentConversation.push(message)
+          self.currentConversation.push(message);
         }
-        self.fetchConversations()
-      })
+        self.fetchConversations();
+      });
       // else updated snippet whenver new message
-      this.$socket.on('new message', function (data) {
-        self.fetchConversations()
-      })
-      this.$socket.on('new conversation', function (data) {
-        self.fetchConversations()
-      })
+      this.$socket.on('new message', () => {
+        self.fetchConversations();
+      });
+      this.$socket.on('new conversation', () => {
+        self.fetchConversations();
+      });
     },
-    replyConversation () {
-      let reply = {conversationId: this.currentConversationId, message: this.message}
-      this.replyByText(reply)
-      this.message = ''
+    replyConversation() {
+      const reply = { conversationId: this.currentConversationId, message: this.message };
+      this.replyByText(reply);
+      this.message = '';
     },
-    searchConversation () {
-      console.log(this.keyword)
+    searchConversation() {
+      console.log(this.keyword);
     },
-    deleteConversation () {
-      var self = this
+    deleteConversation() {
+      const self = this;
       this.$swal({
         title: 'Are you sure to delete this conversation',
         text: "You won't be able to revert this!",
@@ -243,26 +244,26 @@ export default {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then(function () {
-        self.removeConversation({conversationId: self.currentConversationId})
-      })
+        confirmButtonText: 'Yes, delete it!',
+      }).then(() => {
+        self.removeConversation({ conversationId: self.currentConversationId });
+      });
     },
-    fileChange (file, name) {
-      var data = new FormData()
-      data.append('picture', file)
-      this.replyByImage({conversationId: this.currentConversationId, data: data})
-      this.file = null
+    fileChange(file) {
+      const data = new FormData();
+      data.append('picture', file);
+      this.replyByImage({ conversationId: this.currentConversationId, data });
+      this.file = null;
     },
-    getOnlineUser () {
-      var self = this
-      this.$socket.on('user online list', function (data) {
-        console.log(data)
-        self.onlineUsers = data
-      })
-    }
-  }
-}
+    getOnlineUser() {
+      const self = this;
+      this.$socket.on('user online list', (data) => {
+        console.log(data);
+        self.onlineUsers = data;
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

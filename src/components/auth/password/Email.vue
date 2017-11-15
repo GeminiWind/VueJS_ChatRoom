@@ -30,29 +30,28 @@
 <script>
 export default {
   name: 'email',
-  data () {
+  data() {
     return {
-      email: ''
-    }
+      email: '',
+    };
   },
   methods: {
-    forget () {
-      this.$validator.validateAll()
+    forget() {
+      this.$validator.validateAll();
       if (!this.errors.any()) {
-        this.$http.post('/forget', {email: this.email}).then(response => {
+        this.$http.post('/forget', { email: this.email }).then((response) => {
           if (response.data.error == null) {
-            this.$swal.success('Success!', 'An email was sent for your email! Please check it')
+            this.$swal.success('Success!', 'An email was sent for your email! Please check it');
           } else {
-            this.$swal.error('Whoops!', response.data.error)
+            this.$swal.error('Whoops!', response.data.error);
           }
-        }).catch(function (error) {
-          this.$swal.error('Whoops!', error)
-        })
+        }).catch((error) => {
+          this.$swal.error('Whoops!', error);
+        });
       }
-    }
-  }
-
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

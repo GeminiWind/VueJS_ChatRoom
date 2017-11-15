@@ -1,7 +1,7 @@
-import Router from './routes'
-import { auth, loadingBar } from './middleware'
+import Router from './routes';
+import { auth, loadingBar } from './middleware';
 
 // attach middlewares
-Router.middlewares([auth, loadingBar])
+Router.middlewares([auth, loadingBar]);
 
-export default Router
+export default Router;
