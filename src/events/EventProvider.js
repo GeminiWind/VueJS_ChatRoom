@@ -1,4 +1,4 @@
-export default class Event {
+export default class EventProvider {
   constructor(data, chanel) {
     this.broadcastOn = chanel;
     this.data = data;

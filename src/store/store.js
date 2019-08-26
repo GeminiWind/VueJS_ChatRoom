@@ -17,7 +17,9 @@ export default new Vuex.Store({
     auth: authModule,
     conversations: conversationsModule,
   },
-  plugins: [chatSocketPlugin, authSocketPlugin,
+  plugins: [
+    chatSocketPlugin,
+    authSocketPlugin,
     createPersistedState({
       paths: ['auth.token', 'auth.expirationAt'],
       getState: key => Cookies.getJSON(key),

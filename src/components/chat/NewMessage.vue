@@ -9,7 +9,7 @@
     <form @submit.prevent="submitData">
     <h4>Compose new message</h4>
     <div class="form-group">
-    label>Receiver: </label>
+    <label>Receiver: </label>
     <v-select :debounce="250" :on-search="getOptions" :options="options" placeholder="Search Your Friends..." label="fullName" v-model="receiver">
     </v-select>
     </div>

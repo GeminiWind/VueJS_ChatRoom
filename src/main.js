@@ -5,13 +5,18 @@ import vSelect from 'vue-select';
 import VueImgInputer from 'vue-img-inputer';
 import VueLetterAvatar from 'vue-letter-avatar';
 import VueChatScroll from 'vue-chat-scroll';
+import moment from 'moment';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'font-awesome/css/font-awesome.css';
+import 'vodal/common.css';
+import 'vodal/rotate.css';
+import 'sweetalert2/src/sweetalert2.scss';
+
 import { Http, Socket, Swal } from '@plugins';
 import Navbar from './components/Navbar';
 import store from './store/store';
 import Router from './routes';
-
-require('../bootstrap/bootstrap');
-const moment = require('moment');
 
 Vue.use(VeeValidate);
 Vue.use(VueLetterAvatar);

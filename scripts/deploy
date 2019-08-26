@@ -1,0 +1,36 @@
+#!/bin/bash
+APP=$(node -p -e "require('./package.json').name")
+DEPLOYMENT_STATE_BUCKET = $APP-deployment-state-bucket--stage-$STAGE
+LOCKING_STATE_TABLE= $APP-lock-state-table--stage-$STAGE
+
+echo "Initial set up bucket for storing deployment state..."
+echo "DEPLOYMENT_STATE_BUCKET: $DEPLOYMENT_STATE_BUCKET"
+echo "LOCKING_STATE_TABLE: $LOCKING_STATE_TABLE"
+
+if [[ -z $(aws s3api head-bucket --bucket $DEPLOYMENT_STATE_BUCKET) ]];
+then
+  echo "Bucket has already setup. Skip creating bucket to store deployment state"
+else
+  echo "Creating S3 bucket and DynamoDB table to support storing deployment state ..."
+  terraform init provision/pre-provision
+  terraform apply \
+    -var "aws_region=$AWS_DEPLOYMENT_REGION" \
+    -var "stage=$STAGE" \
+    -var "app=$APP"
+    provision/pre-provision
+fi
+
+terraform init \
+  -backend-config "bucket=$DEPLOYMENT_STATE_BUCKET" \
+  -backend-config "dynamodb_table=$LOCKING_STATE_TABLE" \
+  -backend-config "key=$APP.tfState.$STAGE" \
+  -backend-config "region=$AWS_DEPLOYMENT_REGION" \
+  provision/main
+terraform apply \
+  -auto-approve \
+  -var "aws_region=$AWS_DEPLOYMENT_REGION" \
+  -var "stage=$STAGE" \
+  -var "app=$APP"
+  -var "root_domain=$ROOT_DOMAIN" \
+  -var "domain_name=$DOMAIN_NAME" \
+  provision/main

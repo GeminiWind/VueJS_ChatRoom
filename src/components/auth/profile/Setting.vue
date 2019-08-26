@@ -19,9 +19,9 @@
                     <br><br>
                     <form class="form-horizontal">
                         <label for="First_name">First name</label>
-                        <input type="text" class="form-control" id="First_name" v-bind:value="user.profile.first_name" v-model=firstName>
+                        <input type="text" class="form-control" id="First_name" v-model=firstName>
                         <label for="Last_name">Last name</label>
-                        <input type="email" class="form-control" id="Last_name" v-bind:value="user.profile.first_name" v-model=lastName>
+                        <input type="email" class="form-control" id="Last_name" v-model=lastName>
                     </form>
                 </div>
             </div>

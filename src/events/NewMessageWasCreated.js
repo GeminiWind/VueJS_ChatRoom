@@ -1,6 +1,6 @@
-import Event from '@services/Event';
+import EventProvider from './EventProvider';
 
-export default class NewMessageWasCreated extends Event {
+export default class NewMessageWasCreated extends EventProvider {
   constructor(data) {
     super(data, 'new message');
   }

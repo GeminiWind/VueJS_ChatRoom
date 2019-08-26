@@ -24,6 +24,7 @@ export default function createChatSocketPlugin() {
         });
       }
       // update chat snippet of the left side whenever conversation change
+      if (mutation.type === `conversations/${types.PUSH_NEW_MSG_IN_CUR_CONVERSATION}`) {}
       if (mutation.type === `conversations/${types.PUSH_NEW_MSG_IN_CUR_CONVERSATION}` ||
           mutation.type === `conversations/${types.PUSH_NEW_CONVERSATION}` ||
           mutation.type === `conversations/${types.DELETE_CONVERSATION}`) {
