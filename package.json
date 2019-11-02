@@ -16,7 +16,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "js-cookie": "^2.1.4",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "loglevel": "^1.4.1",
     "moment": "^2.18.1",
     "nprogress": "^0.2.0",
