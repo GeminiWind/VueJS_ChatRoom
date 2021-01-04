@@ -11,7 +11,7 @@
     "lint": "eslint --ext .js, .vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
